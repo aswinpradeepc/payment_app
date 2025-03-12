@@ -42,25 +42,58 @@ const ProfileScreen = () => {
         {customerDetails && (
           <View style={styles.detailsContainer}>
             <Text style={styles.detailsTitle}>Customer Details</Text>
-            <Text>Account Number: {customerDetails.account_number}</Text>
-            <Text>Name: {customerDetails.name}</Text>
-            <Text>Email: {customerDetails.email}</Text>
-            <Text>Phone: {customerDetails.phone}</Text>
-            <Text>Address: {customerDetails.address}</Text>
-            <Text>Issue Date: {customerDetails.issue_date}</Text>
-            <Text>Interest Rate: {customerDetails.interest_rate}</Text>
-            <Text>Tenure: {customerDetails.tenure}</Text>
-            <Text>EMI Due: {customerDetails.emi_due}</Text>
+            <View style={styles.detailItem}>
+              <Text style={styles.detailLabel}>Account Number:</Text>
+              <Text style={styles.detailValue}>{customerDetails.account_number}</Text>
+            </View>
+            <View style={styles.detailItem}>
+              <Text style={styles.detailLabel}>Name:</Text>
+              <Text style={styles.detailValue}>{customerDetails.name}</Text>
+            </View>
+            <View style={styles.detailItem}>
+              <Text style={styles.detailLabel}>Email:</Text>
+              <Text style={styles.detailValue}>{customerDetails.email}</Text>
+            </View>
+            <View style={styles.detailItem}>
+              <Text style={styles.detailLabel}>Phone:</Text>
+              <Text style={styles.detailValue}>{customerDetails.phone}</Text>
+            </View>
+            <View style={styles.detailItem}>
+              <Text style={styles.detailLabel}>Address:</Text>
+              <Text style={styles.detailValue}>{customerDetails.address}</Text>
+            </View>
+            <View style={styles.detailItem}>
+              <Text style={styles.detailLabel}>Issue Date:</Text>
+              <Text style={styles.detailValue}>{customerDetails.issue_date}</Text>
+            </View>
+            <View style={styles.detailItem}>
+              <Text style={styles.detailLabel}>Interest Rate:</Text>
+              <Text style={styles.detailValue}>{customerDetails.interest_rate}</Text>
+            </View>
+            <View style={styles.detailItem}>
+              <Text style={styles.detailLabel}>Tenure:</Text>
+              <Text style={styles.detailValue}>{customerDetails.tenure}</Text>
+            </View>
+            <View style={styles.detailItem}>
+              <Text style={styles.detailLabel}>EMI Due:</Text>
+              <Text style={styles.detailValue}>{customerDetails.emi_due}</Text>
+            </View>
           </View>
         )}
         {paymentHistory.length > 0 && (
           <View style={styles.historyContainer}>
             <Text style={styles.detailsTitle}>Payment History</Text>
             {paymentHistory.map((payment, index) => (
-              <View key={index} style={styles.paymentItem}>
-                <Text>Payment Date: {payment.payment_date}</Text>
-                <Text>Payment Amount: {payment.payment_amount}</Text>
-                <Text>Status: {payment.status}</Text>
+              <View key={index}>
+                <View style={styles.paymentItem}>
+                  <Text style={styles.paymentLabel}>Payment Date:</Text>
+                  <Text style={styles.paymentValue}>{payment.payment_date}</Text>
+                  <Text style={styles.paymentLabel}>Payment Amount:</Text>
+                  <Text style={styles.paymentValue}>{payment.payment_amount}</Text>
+                  <Text style={styles.paymentLabel}>Status:</Text>
+                  <Text style={styles.paymentValue}>{payment.status}</Text>
+                </View>
+                {index < paymentHistory.length - 1 && <View style={styles.divider} />}
               </View>
             ))}
           </View>
@@ -85,25 +118,52 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: '#fff',
     marginBottom: 20,
+    textAlign: 'center',
   },
   detailsContainer: {
     backgroundColor: '#fff',
     padding: 20,
-    borderRadius: 5,
+    borderRadius: 10,
     marginBottom: 20,
   },
   detailsTitle: {
     fontSize: 18,
     marginBottom: 10,
+    fontWeight: 'bold',
+    color: '#0b163f',
+  },
+  detailItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  detailLabel: {
+    fontWeight: 'bold',
+    color: '#0b163f',
+  },
+  detailValue: {
+    color: '#0b163f',
   },
   historyContainer: {
     backgroundColor: '#fff',
     padding: 20,
-    borderRadius: 5,
+    borderRadius: 10,
     marginBottom: 20,
   },
   paymentItem: {
     marginBottom: 10,
+  },
+  paymentLabel: {
+    fontWeight: 'bold',
+    color: '#0b163f',
+  },
+  paymentValue: {
+    color: '#0b163f',
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#ccc',
+    marginVertical: 10,
   },
   buttonContainer: {
     padding: 20,
