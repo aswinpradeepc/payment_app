@@ -36,36 +36,40 @@ const ProfileScreen = () => {
   }, [accountNumber]);
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>Profile</Text>
-      {customerDetails && (
-        <View style={styles.detailsContainer}>
-          <Text style={styles.detailsTitle}>Customer Details</Text>
-          <Text>Account Number: {customerDetails.account_number}</Text>
-          <Text>Name: {customerDetails.name}</Text>
-          <Text>Email: {customerDetails.email}</Text>
-          <Text>Phone: {customerDetails.phone}</Text>
-          <Text>Address: {customerDetails.address}</Text>
-          <Text>Issue Date: {customerDetails.issue_date}</Text>
-          <Text>Interest Rate: {customerDetails.interest_rate}</Text>
-          <Text>Tenure: {customerDetails.tenure}</Text>
-          <Text>EMI Due: {customerDetails.emi_due}</Text>
-        </View>
-      )}
-      {paymentHistory.length > 0 && (
-        <View style={styles.historyContainer}>
-          <Text style={styles.detailsTitle}>Payment History</Text>
-          {paymentHistory.map((payment, index) => (
-            <View key={index} style={styles.paymentItem}>
-              <Text>Payment Date: {payment.payment_date}</Text>
-              <Text>Payment Amount: {payment.payment_amount}</Text>
-              <Text>Status: {payment.status}</Text>
-            </View>
-          ))}
-        </View>
-      )}
-      <Button title="Pay EMI" onPress={() => navigation.navigate('Payment', { accountNumber })} color="#175cff" />
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <Text style={styles.title}>Profile</Text>
+        {customerDetails && (
+          <View style={styles.detailsContainer}>
+            <Text style={styles.detailsTitle}>Customer Details</Text>
+            <Text>Account Number: {customerDetails.account_number}</Text>
+            <Text>Name: {customerDetails.name}</Text>
+            <Text>Email: {customerDetails.email}</Text>
+            <Text>Phone: {customerDetails.phone}</Text>
+            <Text>Address: {customerDetails.address}</Text>
+            <Text>Issue Date: {customerDetails.issue_date}</Text>
+            <Text>Interest Rate: {customerDetails.interest_rate}</Text>
+            <Text>Tenure: {customerDetails.tenure}</Text>
+            <Text>EMI Due: {customerDetails.emi_due}</Text>
+          </View>
+        )}
+        {paymentHistory.length > 0 && (
+          <View style={styles.historyContainer}>
+            <Text style={styles.detailsTitle}>Payment History</Text>
+            {paymentHistory.map((payment, index) => (
+              <View key={index} style={styles.paymentItem}>
+                <Text>Payment Date: {payment.payment_date}</Text>
+                <Text>Payment Amount: {payment.payment_amount}</Text>
+                <Text>Status: {payment.status}</Text>
+              </View>
+            ))}
+          </View>
+        )}
+      </ScrollView>
+      <View style={styles.buttonContainer}>
+        <Button title="Pay EMI" onPress={() => navigation.navigate('Payment', { accountNumber })} color="#175cff" />
+      </View>
+    </View>
   );
 };
 
@@ -73,6 +77,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#0b163f',
+  },
+  scrollContainer: {
     padding: 20,
   },
   title: {
@@ -98,6 +104,10 @@ const styles = StyleSheet.create({
   },
   paymentItem: {
     marginBottom: 10,
+  },
+  buttonContainer: {
+    padding: 20,
+    backgroundColor: '#0b163f',
   },
 });
 

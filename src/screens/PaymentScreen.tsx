@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useNavigation } from "@react-navigation/native";
 import axios from 'axios';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/AppNavigator';
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Payment'>;
 
 const PaymentScreen = () => {
   const route = useRoute();
+  const navigation = useNavigation<NavigationProp>();
   const { accountNumber } = route.params as { accountNumber: string };
   const [paymentAmount, setPaymentAmount] = useState('');
 
   const handlePayment = async () => {
     try {
-      const response = await axios.post('https://payment.radr.in/payments', {
+      await axios.post('https://payment.radr.in/payments', {
         account_number: accountNumber,
         payment_amount: parseFloat(paymentAmount),
       });
-      alert('Payment Successful');
+      navigation.navigate('PaymentSuccess', { accountNumber });
     } catch (error) {
       console.error(error);
       alert('Payment Failed');
