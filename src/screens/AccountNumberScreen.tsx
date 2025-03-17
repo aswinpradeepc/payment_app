@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { View, Text, TextInput, Button, Alert, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
@@ -11,6 +11,10 @@ const AccountNumberScreen = () => {
   const [accountNumber, setAccountNumber] = useState('');
 
   const handleSubmit = () => {
+    if (accountNumber.trim() === '') {
+      Alert.alert('Error', 'Please enter an account number');
+      return;
+    }
     navigation.navigate('Profile', { accountNumber });
   };
 

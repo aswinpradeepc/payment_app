@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, ScrollView, StyleSheet } from "react-native";
+import { View, Text, Button, ScrollView, StyleSheet, Alert } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
@@ -24,11 +24,13 @@ const ProfileScreen = () => {
           const history = await getPaymentHistory(accountNumber);
           setPaymentHistory(history);
         } else {
-          alert('Customer not found');
+          Alert.alert('User Not Found', 'No account exists with the provided details.', [
+            { text: 'OK', onPress: () => navigation.navigate('AccountNumber') }
+          ]);
         }
       } catch (error) {
         console.error(error);
-        alert('Error fetching details');
+        Alert.alert('Error', 'Error fetching details');
       }
     };
 
